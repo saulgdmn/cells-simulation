@@ -24,7 +24,6 @@ namespace LifeProj
             CellsPositions = new List<Vector2>();
             IterationsCount = 0;
             IsLockdown = false;
-            IsReady = false;
             LockdownDuration = 0;
             DeathByAgeCellsCount = 0;
             DeathByInfectionCellsCount = 0;
