@@ -1,4 +1,7 @@
 ﻿.idea
-bin
-obj
-packages
+bin/
+obj/
+.vs
+packages/
+
+*.user

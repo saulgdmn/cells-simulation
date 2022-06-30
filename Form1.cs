@@ -21,6 +21,7 @@ namespace LifeProj
                 true);
             
             Field = new Field();
+            Field.Init();
             Thread thr = new Thread(ThreadFunc);
             thr.Start();
         }

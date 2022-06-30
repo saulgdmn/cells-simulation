@@ -13,6 +13,8 @@ namespace LifeProj
         public List<Cell> Cells;
         public List<Vector2> CellsPositions;
         public int IterationsCount;
+        public bool IsLockdown;
+        public int LockdownDuration;
         public int DeathByAgeCellsCount;
         public int DeathByInfectionCellsCount;
 
@@ -21,9 +23,15 @@ namespace LifeProj
             Cells = new List<Cell>();
             CellsPositions = new List<Vector2>();
             IterationsCount = 0;
+            IsLockdown = false;
+            IsReady = false;
+            LockdownDuration = 0;
             DeathByAgeCellsCount = 0;
             DeathByInfectionCellsCount = 0;
-            
+        }
+
+        public void Init()
+        {
             foreach (var x in Enumerable.Range(0, Simulation.FieldWidth))
             {
                 foreach (var y in Enumerable.Range(0, Simulation.FieldHeight))
@@ -38,8 +46,8 @@ namespace LifeProj
                     CellState.Healthy,
                     Simulation.GenSex(),
                     position,
-                    Vector2.Normalize(new Vector2((float)Simulation.NextDouble(-100.0, 100.0),
-                        (float)Simulation.NextDouble(-100.0, 100.0)))));
+                    Simulation.GenDirection(),
+                    this));
 
             foreach (var cell in Cells.OrderBy(x => Simulation.Rand.Next()).Take(Simulation.OnInitInfectedCellsCount))
                 cell.State = CellState.Infected;
@@ -99,21 +107,15 @@ namespace LifeProj
                 CellState.Healthy,
                 Simulation.GenSex(),
                 CellsPositions[Simulation.NextInt(0, CellsPositions.Count)],
-                Vector2.Normalize(new Vector2((float)Simulation.NextDouble(-100.0, 100.0),
-                    (float)Simulation.NextDouble(-100.0, 100.0)))));
-            return;
+                Simulation.GenDirection(),
+                this));
         }
 
         public void NextIter()
         {
             IterationsCount += 1;
-
-            //foreach (var cell in Cells.ToArray())
-                //cell.NextIter();
-
-            //foreach(var cell in Cells.ToArray())
-            //    IterCell(cell);
-
+            Parallel.ForEach(Cells.ToArray(), IterCell);
+            
             foreach (var cell in Cells.ToArray())
             {
                 if (cell.State == CellState.DeathByInfection)
@@ -121,6 +123,7 @@ namespace LifeProj
                     Cells.Remove(cell);
                     DeathByInfectionCellsCount++;
                 }
+                
                 if (cell.State == CellState.DeathByAge)
                 {
                     Cells.Remove(cell);
@@ -128,7 +131,21 @@ namespace LifeProj
                 }
             }
 
-            var result = Parallel.ForEach(Cells.ToArray(), IterCell);
+            if (IsLockdown == false)
+            {
+                if ((double)GetInfectedCellsCount() / Cells.Count > Simulation.LockdownInfectedRate)
+                {
+                    IsLockdown = true;
+                    LockdownDuration = Simulation.LockdownDuration;
+                }
+            }
+            else
+            {
+                if (--LockdownDuration == 0)
+                    IsLockdown = false;
+            }
+
+            
         }
         
         private void IterCell(Cell cell)

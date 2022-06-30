@@ -30,31 +30,34 @@ namespace LifeProj
         public double Immunity;
         public CellSex Sex;
         public CellState State;
-        public Cell LastPartner;
         public int LastCoitus;
         public int CoitusRelaxation;
         public Cell LastCoitusCell;
-        public bool IsIsolated;
-        public bool IsRestricted;
-
+        
         public Vector2 Position;
         public Vector2 Direction;
         public double Velocity;
         public double Radius;
         public Cell LastCollided;
 
-        public Cell(int age, int lifespan, double immunity, CellState state, CellSex sex, Vector2 position, Vector2 direction)
+        public Field Parent;
+
+        public Cell(int age, int lifespan, double immunity, CellState state, CellSex sex,
+            Vector2 position, Vector2 direction, Field parent)
         {
+            Parent = parent;
+            
             Age = age;
             Lifespan = lifespan;
             Immunity = immunity;
             IncubationPeriod = 0;
+            InfectionPeriod = 0;
             Sex = sex;
             State = state;
-            LastPartner = null;
             LastCoitus = 0;
             CoitusRelaxation = Simulation.NextInt(Simulation.CoitusRelaxationMin, Simulation.CoitusRelaxationMax);
-            IsRestricted = false;
+
+            LastCoitusCell = null;
 
             Position = position;
             Direction = direction;
@@ -67,8 +70,8 @@ namespace LifeProj
             if (State == CellState.Infected)
                 return Simulation.VelocityMin;
             
-            if (IsRestricted)
-                return Simulation.CalcVelocityByAge(Age, Lifespan) * Simulation.LockdownSlowdown;
+            if (Parent.IsLockdown)
+                return Simulation.CalcVelocityByAge(Age, Lifespan) * (1.0 - Simulation.LockdownSlowdown);
             else
                 return Simulation.CalcVelocityByAge(Age, Lifespan);
         }
@@ -98,8 +101,7 @@ namespace LifeProj
 
                 State = CellState.Recovered;
             }
-
-
+            
             Radius = Simulation.CalcRadiusByAge(Age, Lifespan);
             Velocity = CalcVelocity();
             Position += Direction * (float)Velocity;
@@ -130,7 +132,8 @@ namespace LifeProj
             if (State != CellState.Healthy)
                 return;
 
-            if (Simulation.NextDouble(0.0, 1.0) * (1.0 - Immunity) < Simulation.CalcChanceOfInfectingByAge(Age, Lifespan))
+            if (Simulation.NextDouble(0.0, 1.0) * (1.0 - Immunity + (Parent.IsLockdown ? Simulation.VaccinationBoost : 0.0))
+                < Simulation.CalcChanceOfInfectingByAge(Age, Lifespan))
             {
                 State = CellState.Incubation;
                 IncubationPeriod = Simulation.NextInt(Simulation.IncubationPeriodMin, Simulation.IncubationPeriodMax);

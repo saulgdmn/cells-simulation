@@ -1,6 +1,7 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Drawing;
+using System.Numerics;
+
 
 
 namespace LifeProj
@@ -59,7 +60,7 @@ namespace LifeProj
     {
         public static ThreadSafeRandom Rand = new ThreadSafeRandom();
 
-        public static double SimulationTick = 30.0;
+        public static double SimulationTick = 10.0;
         public static int FieldWidth = 1500;                   // pixels
         public static int FieldHeight = 900;                  // poxels
         public static int OnInitCellsCount = 300;             // count
@@ -95,13 +96,13 @@ namespace LifeProj
         
         public static int IncubationPeriodMin = 400;         // iterations
         public static int IncubationPeriodMax = 800;         // iterations
-        public static int InfectionPeriodMin = 600;
-        public static int InfectionPeriodMax = 1500;
+        public static int InfectionPeriodMin = 1000;
+        public static int InfectionPeriodMax = 2000;
         
-        public static double LockdownInfectedRate = 0.5;      // coefficient
-        public static double LockdownSlowdown = 0.5;          // coefficient
-        public static int LockdownDuration = 10000;             // iterations
-        public static double VaccinationIncrementer = 0.3;    // coefficient
+        public static double LockdownInfectedRate = 0.1;      // coefficient
+        public static double LockdownSlowdown = 0.9;          // coefficient
+        public static int LockdownDuration = 3000;             // iterations
+        public static double VaccinationBoost = 0.3;    // coefficient
         public static int MedicinePlacesCount = 250;          // count
         public static double MedicineEfficiency = 0.1;        // coefficient
 
@@ -162,6 +163,12 @@ namespace LifeProj
         public static int NextInt(int min, int max)
         {
             return Rand.Next(min, max);
-        } 
+        }
+
+        public static Vector2 GenDirection()
+        {
+            return Vector2.Normalize(new Vector2((float)Simulation.NextDouble(-100.0, 100.0),
+                (float)Simulation.NextDouble(-100.0, 100.0)));
+        }
     }
 }
