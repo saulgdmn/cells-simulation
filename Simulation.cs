@@ -57,39 +57,47 @@ namespace LifeProj
     }
     public static class Simulation
     {
-        public static ThreadSafeRandom Rand = new ThreadSafeRandom(); 
+        public static ThreadSafeRandom Rand = new ThreadSafeRandom();
 
-        public static int FieldWidth = 1900;                   // pixels
-        public static int FieldHeight = 1000;                  // poxels
-        public static int OnInitCellsCount = 3000;             // count
+        public static double SimulationTick = 30.0;
+        public static int FieldWidth = 1500;                   // pixels
+        public static int FieldHeight = 900;                  // poxels
+        public static int OnInitCellsCount = 300;             // count
         public static int OnInitInfectedCellsCount = 5;     // count
-        public static double CellRadiusMin = 5.0;             // distance
-        public static double CellRadiusMax = 10.0;             // distance
+        public static double CellRadiusMin = 1.0;             // distance
+        public static double CellRadiusMax = 8.0;             // distance
         
         public static int AgeMin = 0;                      // iterations
-        public static int AgeMax = 1;                       // iterations
-        public static int LifespanMin = 10000;                 // iterations
-        public static int LifespanMax = 20000;                 // iterations
+        public static int AgeMax = 2000;                       // iterations
+        public static int LifespanMin = 5000;                 // iterations
+        public static int LifespanMax = 12000;                 // iterations
 
-        public static double ChanceOfBirth = 0.1;            // coefficient
-        public static int CoitusRelaxation = 5000;            // iterations
+        public static int CoitusRelaxationMin = 400;            // iterations
+        public static int CoitusRelaxationMax = 3000;            // iterations
         
         public static double ImmunityMin = 0.0;              // coefficient
-        public static double ImmunityMax = 0.1;              // coefficient
+        public static double ImmunityMax = 0.3;              // coefficient
         
-        public static double VelocityMin = 0.8;              // distance
-        public static double VelocityMax = 2.0;              // distance   
+        public static double VelocityMin = 0.5;              // distance
+        public static double VelocityMax = 3.0;              // distance   
 
         public static double Visibility = 10.0;               // distance
         public static int InfectedAgeDecrementer = 1;      // iterations
-        public static double ChanceOfDeath = 0.00001;              // coefficient
-        public static double ChanceOfRecovering = 0.00001;       // coefficient
-        public static double ChanceOfInfectingMin = 0.4;     // coefficient
-        public static double ChanceOfInfectingMax = 0.6;     // coefficient
+        
+        public static double ChanceOfBirth = 0.1;            // coefficient
+        public static double ChanceOfDeathMin = 0.5;              // coefficient
+        public static double ChanceOfDeathMax = 0.7;              // coefficient
+        public static double ChanceOfInfectingMin = 0.1;     // coefficient
+        public static double ChanceOfInfectingMax = 0.2;     // coefficient
+        
         public static double DistanceOfInfectingPow = 20.0 * 20.0;   // distance
-        public static int IncubationPeriodMin = 500;         // iterations
-        public static int IncubationPeriodMax = 2000;         // iterations
-
+        public static double DistanceOfCoitusPow = 20.0 * 20.0;
+        
+        public static int IncubationPeriodMin = 400;         // iterations
+        public static int IncubationPeriodMax = 800;         // iterations
+        public static int InfectionPeriodMin = 600;
+        public static int InfectionPeriodMax = 1500;
+        
         public static double LockdownInfectedRate = 0.5;      // coefficient
         public static double LockdownSlowdown = 0.5;          // coefficient
         public static int LockdownDuration = 10000;             // iterations
@@ -101,6 +109,9 @@ namespace LifeProj
         public static SolidBrush InfectedBrush = new SolidBrush(Color.DarkRed);
         public static SolidBrush IncubationBrush = new SolidBrush(Color.Yellow);
         public static SolidBrush RecoveredBrush = new SolidBrush(Color.DarkBlue);
+        
+        public static Font MetricsFont = new Font("Consolas", 8);
+        public static SolidBrush MetricsBrush = new SolidBrush(Color.Black);
 
         public static int GenAge()
         {
@@ -119,31 +130,28 @@ namespace LifeProj
         
         public static CellSex GenSex()
         {
-            return NextInt(0, 1) == 0 ? CellSex.Male : CellSex.Female;
+            return NextDouble(0.0, 1.0) < 0.5 ? CellSex.Male : CellSex.Female;
         }
-        public static double CalcRadiusByAge(int age)
+        public static double CalcRadiusByAge(int age, int lifespan)
         {
-            return CellRadiusMin + age * (CellRadiusMax - CellRadiusMin) / LifespanMax;
+            return CellRadiusMax - age * (CellRadiusMax - CellRadiusMin) / lifespan;
         }
 
-        public static double CalcVelocityByAge(int age)
+        public static double CalcVelocityByAge(int age, int lifespan)
         {
-            return VelocityMax - age * (VelocityMax - VelocityMin) / LifespanMax;
+            return VelocityMax - age * (VelocityMax - VelocityMin) / lifespan;
         }
 
-        public static double CalcChanceOfInfectingByAge(int age)
+        public static double CalcChanceOfInfectingByAge(int age, int lifespan)
         {
             return ChanceOfInfectingMin +
-                   age * (ChanceOfInfectingMax - ChanceOfInfectingMin) / LifespanMax;
+                   age * (ChanceOfInfectingMax - ChanceOfInfectingMin) / lifespan;
         }
         
-        private static uint x = 548787455, y = 842502087, z = 3579807591, w = 273326509;
-
-        public static uint XORShift()
+        public static double CalcChanceOfDeathByAge(int age, int lifespan)
         {
-            uint t = x ^ (x << 11);
-            x = y; y = z; z = w;
-            return w = w ^ (w >> 19) ^ t ^ (t >> 8);
+            return ChanceOfDeathMin -
+                   age * (ChanceOfDeathMax - ChanceOfDeathMin) / lifespan;
         }
 
         public static double NextDouble(double min, double max)

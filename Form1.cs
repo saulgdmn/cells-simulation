@@ -19,6 +19,7 @@ namespace LifeProj
                 ControlStyles.UserPaint | 
                 ControlStyles.DoubleBuffer, 
                 true);
+            
             Field = new Field();
             Thread thr = new Thread(ThreadFunc);
             thr.Start();
@@ -26,7 +27,6 @@ namespace LifeProj
 
         public void ThreadFunc()
         {
-            
             while (true)
             {
                 Stopwatch loopIterWatch = new Stopwatch();
@@ -41,7 +41,7 @@ namespace LifeProj
                 NextIterElapsed = nextIterWatch.Elapsed.TotalMilliseconds;
                 
                 Invalidate();
-                while (loopIterWatch.Elapsed.TotalMilliseconds < 50.0);
+                while (loopIterWatch.Elapsed.TotalMilliseconds < Simulation.SimulationTick);
                 
                 loopIterWatch.Stop();
                 LoopIterElapsed = loopIterWatch.Elapsed.TotalMilliseconds;
@@ -70,9 +70,12 @@ namespace LifeProj
             
             Pen pen = new Pen(Color.Black);
             
-            g.DrawRectangle(pen, 0.0f, 0.0f, Simulation.FieldWidth, Simulation.FieldHeight);
+            g.DrawRectangle(pen, 1.0f, 1.0f, Simulation.FieldWidth, Simulation.FieldHeight);
             foreach (var cell in Field.Cells.ToArray())
             {
+                if(cell == null)
+                    continue;
+                
                 SolidBrush brush;
                 switch (cell.State)
                 {
@@ -95,20 +98,28 @@ namespace LifeProj
                 FillCircle(g, brush, cell.Position.X, cell.Position.Y, (float)cell.Radius);
             }
             
-            Font drawFont = new Font("Consolas", 8);
-            SolidBrush drawBrush = new SolidBrush(Color.Black);
+           
             
             // Set format of string.
             StringFormat drawFormat = new StringFormat();
-            drawFormat.FormatFlags = StringFormatFlags.DisplayFormatControl;
+            drawFormat.FormatFlags = StringFormatFlags.DisplayFormatControl | StringFormatFlags.FitBlackBox;
              
             // Draw string to screen.
             e.Graphics.DrawString(
                 "NextIterElapsed: " + NextIterElapsed + "\n" + 
                 "LoopIterElapsed: " + LoopIterElapsed + "\n" + 
                 "ItersPerSecond: " + Math.Round(1000.0 / LoopIterElapsed) + "\n" +
-                "IterationsCount: " + Field.IterationsCount,
-                drawFont, drawBrush, 0, 0, drawFormat);
+                "IterationsCount: " + Field.IterationsCount + "\n" +
+                "CellsCount: " + Field.GetCellsCount() + "\n" + 
+                "MaleCellsCount: " + Field.GetMaleCellsCount() + "\n" + 
+                "FemaleCellsCount: " + Field.GetFemaleCellsCount() + "\n" + 
+                "HealthyCellsCount: " + Field.GetHealthyCellsCount() + "\n" + 
+                "InfectedCellsCount: " + Field.GetInfectedCellsCount() + "\n" + 
+                "IncubationCellsCount: " + Field.GetIncubationCellsCount() + "\n" + 
+                "RecoveredCellsCount: " + Field.GetRecoveredCellsCount() + "\n" +
+                "DeathByAgeCellsCount: " + Field.GetDeathByAgeCellsCount() + "\n" +
+                "DeathByInfectionCellsCount: " + Field.GetDeathByInfectionCellsCount(),
+                Simulation.MetricsFont, Simulation.MetricsBrush, 2, 2, drawFormat);
         }
     }
 }
