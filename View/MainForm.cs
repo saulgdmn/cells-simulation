@@ -29,8 +29,13 @@ namespace LifeProj.View {
             
             Simulation.FieldWidth = simulationPanel.Width - 2;
             Simulation.FieldHeight = simulationPanel.Height - 2;
+            FieldHeightTextBox.Text = (simulationPanel.Height - 2).ToString();
+            FieldWidthTextBox.Text = (simulationPanel.Width - 2).ToString();
             _field = new Field();
             _simulationRunning = false;
+
+            CellsOnStartTextBox.Text = Simulation.OnInitCellsCount.ToString();
+            InfectedCellsTextBox.Text = Simulation.OnInitInfectedCellsCount.ToString();
         }
         
         private void SetupRenderingThread()
@@ -122,6 +127,7 @@ namespace LifeProj.View {
                 _simulationPaused = false;
                 pauseButton.Text = "Pause";
             }else{
+                SetupSimulationProperties();
                 _field.Init();
                 FormBorderStyle = FormBorderStyle.FixedSingle;
                 SetupRenderingThread();
@@ -138,7 +144,18 @@ namespace LifeProj.View {
         private void MainForm_Resize(object sender, EventArgs e){
             Simulation.FieldWidth = simulationPanel.Width - 2;
             Simulation.FieldHeight = simulationPanel.Height - 2;
+
+            FieldHeightTextBox.Text = (simulationPanel.Height - 2).ToString();
+            FieldWidthTextBox.Text = (simulationPanel.Width - 2).ToString();
             simulationPanel.Refresh();
         }
+
+        // TODO add validation
+        private void SetupSimulationProperties()
+        {
+            Simulation.OnInitCellsCount = int.Parse(CellsOnStartTextBox.Text);
+            Simulation.OnInitInfectedCellsCount = int.Parse(InfectedCellsTextBox.Text);
+        }
+
     }
 }

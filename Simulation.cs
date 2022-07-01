@@ -61,10 +61,10 @@ namespace LifeProj
         public static ThreadSafeRandom Rand = new ThreadSafeRandom();
 
         public static double SimulationTick = 10.0;
-        public static int FieldWidth = 1500;                   // pixels
-        public static int FieldHeight = 900;                  // poxels
-        public static int OnInitCellsCount = 300;             // count
-        public static int OnInitInfectedCellsCount = 5;     // count
+        public static int FieldWidth = 0;               // pixels
+        public static int FieldHeight = 0;              // pixels
+        public static int OnInitCellsCount = 300;           // count
+        public static int OnInitInfectedCellsCount = 10;    // count
         public static double CellRadiusMin = 1.0;             // distance
         public static double CellRadiusMax = 8.0;             // distance
         
