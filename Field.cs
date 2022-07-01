@@ -29,6 +29,17 @@ namespace LifeProj
             DeathByInfectionCellsCount = 0;
         }
 
+        public void Reset()
+        {
+            Cells.Clear();
+            CellsPositions.Clear();
+            IterationsCount = 0;
+            IsLockdown = false;
+            LockdownDuration = 0;
+            DeathByAgeCellsCount = 0;
+            DeathByInfectionCellsCount = 0;
+        }
+
         public void Init()
         {
             foreach (var x in Enumerable.Range(0, Simulation.FieldWidth))

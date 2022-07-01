@@ -11,6 +11,10 @@ namespace LifeProj.View {
         private readonly Field _field;
         private double _nextIterElapsed;
         private double _loopIterElapsed;
+
+        private Thread _renderingThread;
+
+        private volatile bool _simulationRunning;
         
         public MainForm(){
             
@@ -20,16 +24,14 @@ namespace LifeProj.View {
                 ControlStyles.UserPaint | 
                 ControlStyles.DoubleBuffer, 
                 true);
-            
             _field = new Field();
-            _field.Init();
-
-            SetupRenderingThread();
         }
         
-        private void SetupRenderingThread(){
-            var thread = new Thread(() => {
-                while (true){
+        private void SetupRenderingThread()
+        {
+            _simulationRunning = true;
+            _renderingThread = new Thread(() => {
+                while (_simulationRunning){
                     var loopIterWatch = new Stopwatch();
                     var nextIterWatch = new Stopwatch();
 
@@ -48,7 +50,7 @@ namespace LifeProj.View {
                     _loopIterElapsed = loopIterWatch.Elapsed.TotalMilliseconds;
                 }
             }){IsBackground = true};
-            thread.Start();
+            _renderingThread.Start();
         }
 
         private void simulationPanel_Paint(object sender, PaintEventArgs e) {
@@ -59,6 +61,7 @@ namespace LifeProj.View {
             
             e.Graphics.DrawRectangle(new Pen(Color.Black), 1.0f, 1.0f, Simulation.FieldWidth, Simulation.FieldHeight);
             
+            if (!_simulationRunning) return;
             foreach (var cell in _field.Cells.ToArray()){
                 if (cell == null){
                     continue;
@@ -105,6 +108,8 @@ namespace LifeProj.View {
             startButton.Enabled = false;
             continueButton.Enabled = false;
             
+            _field.Init();
+            SetupRenderingThread();
         }
 
         private void resetButton_Click(object sender, EventArgs e) {
@@ -112,6 +117,11 @@ namespace LifeProj.View {
             resetButton.Enabled = false;
             pauseButton.Enabled = false;
             continueButton.Enabled = false;
+
+            _simulationRunning = false;
+            _renderingThread.Abort();
+            _field.Reset();
+            simulationPanel.Refresh();
         }
 
         private void pauseButton_Click(object sender, EventArgs e) {
