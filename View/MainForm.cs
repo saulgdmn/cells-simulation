@@ -24,6 +24,9 @@ namespace LifeProj.View {
                 ControlStyles.UserPaint | 
                 ControlStyles.DoubleBuffer, 
                 true);
+            
+            Simulation.FieldWidth = simulationPanel.Width - 2;
+            Simulation.FieldHeight = simulationPanel.Height - 2;
             _field = new Field();
         }
         
@@ -54,11 +57,7 @@ namespace LifeProj.View {
         }
 
         private void simulationPanel_Paint(object sender, PaintEventArgs e) {
-            
-            // TODO will be set just once on start
-            Simulation.FieldWidth = simulationPanel.Width - 2;
-            Simulation.FieldHeight = simulationPanel.Height - 2;
-            
+
             e.Graphics.DrawRectangle(new Pen(Color.Black), 1.0f, 1.0f, Simulation.FieldWidth, Simulation.FieldHeight);
             
             if (!_simulationRunning) return;
@@ -110,6 +109,7 @@ namespace LifeProj.View {
             
             _field.Init();
             SetupRenderingThread();
+            FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
         private void resetButton_Click(object sender, EventArgs e) {
@@ -122,6 +122,7 @@ namespace LifeProj.View {
             _renderingThread.Abort();
             _field.Reset();
             simulationPanel.Refresh();
+            FormBorderStyle = FormBorderStyle.Sizable;
         }
 
         private void pauseButton_Click(object sender, EventArgs e) {
@@ -132,6 +133,12 @@ namespace LifeProj.View {
         private void continueButton_Click(object sender, EventArgs e) {
             pauseButton.Enabled = true;
             continueButton.Enabled = false;
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e){
+            Simulation.FieldWidth = simulationPanel.Width - 2;
+            Simulation.FieldHeight = simulationPanel.Height - 2;
+            simulationPanel.Refresh();
         }
     }
 }

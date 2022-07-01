@@ -150,8 +150,10 @@
             this.ClientSize = new System.Drawing.Size(1083, 620);
             this.Controls.Add(this.mainLayout);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.MinimumSize = new System.Drawing.Size(850, 600);
             this.Name = "MainForm";
             this.Text = "Life simulation";
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.mainLayout.ResumeLayout(false);
             this.controlsLayout.ResumeLayout(false);
             this.buttonsLayout.ResumeLayout(false);
