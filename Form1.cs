@@ -22,7 +22,9 @@ namespace LifeProj
             
             Field = new Field();
             Field.Init();
+            
             Thread thr = new Thread(ThreadFunc);
+            thr.IsBackground = true;
             thr.Start();
         }
 
@@ -68,10 +70,8 @@ namespace LifeProj
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            
-            Pen pen = new Pen(Color.Black);
-            
-            g.DrawRectangle(pen, 1.0f, 1.0f, Simulation.FieldWidth, Simulation.FieldHeight);
+
+            g.DrawRectangle(Simulation.BorderPen, 1.0f, 1.0f, Simulation.FieldWidth, Simulation.FieldHeight);
             foreach (var cell in Field.Cells.ToArray())
             {
                 if(cell == null)
@@ -92,15 +92,27 @@ namespace LifeProj
                     case CellState.Recovered:
                         brush = Simulation.RecoveredBrush;
                         break;
+                    case CellState.Isolated:
+                        continue;
                     default:
                         brush = Simulation.HealthyBrush;
                         break;
                 }
                 FillCircle(g, brush, cell.Position.X, cell.Position.Y, (float)cell.Radius);
             }
-            
-           
-            
+
+            double isolatedX = 10.0, isolatedY = Simulation.FieldHeight + Simulation.CellRadiusMax + 10.0;
+            foreach (var cell in Field.Cells.FindAll(x => x.State == CellState.Isolated).ToArray())
+            {
+                FillCircle(g, Simulation.IsolatedBrush, (float)isolatedX, (float)isolatedY, (float)cell.Radius);
+                isolatedX += cell.Radius + 10.0;
+                if (isolatedX >= Simulation.FieldWidth)
+                {
+                    isolatedX = 10.0;
+                    isolatedY += Simulation.CellRadiusMax * 2 + 10.0;
+                }
+            }
+
             // Set format of string.
             StringFormat drawFormat = new StringFormat();
             drawFormat.FormatFlags = StringFormatFlags.DisplayFormatControl | StringFormatFlags.FitBlackBox;
@@ -119,7 +131,8 @@ namespace LifeProj
                 "IncubationCellsCount: " + Field.GetIncubationCellsCount() + "\n" + 
                 "RecoveredCellsCount: " + Field.GetRecoveredCellsCount() + "\n" +
                 "DeathByAgeCellsCount: " + Field.GetDeathByAgeCellsCount() + "\n" +
-                "DeathByInfectionCellsCount: " + Field.GetDeathByInfectionCellsCount(),
+                "DeathByInfectionCellsCount: " + Field.GetDeathByInfectionCellsCount() + "\n" +
+                "IsolatedCellsCount: " + Field.GetIsolatedCellsCount(),
                 Simulation.MetricsFont, Simulation.MetricsBrush, 2, 2, drawFormat);
         }
     }

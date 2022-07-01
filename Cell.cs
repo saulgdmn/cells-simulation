@@ -90,10 +90,11 @@ namespace LifeProj
             {
                 State = CellState.Infected;
                 InfectionPeriod = Simulation.NextInt(Simulation.InfectionPeriodMin, Simulation.InfectionPeriodMax);
-            } else if (State == CellState.Infected && --InfectionPeriod == 0)
+            } else if ((State == CellState.Infected || State == CellState.Isolated) && --InfectionPeriod == 0)
             {
                 Lifespan -= Simulation.InfectedAgeDecrementer;
-                if (Simulation.NextDouble(0.0, 1.0) < Simulation.CalcChanceOfDeathByAge(Age, Lifespan))
+                if (Simulation.NextDouble(0.0, 1.0) < Simulation.CalcChanceOfDeathByAge(Age, Lifespan) * 
+                    (State == CellState.Isolated ? (1.0 - Simulation.MedicineEfficiency) : 1.0))
                 {
                     State = CellState.DeathByInfection;
                     return;
@@ -103,6 +104,10 @@ namespace LifeProj
             }
             
             Radius = Simulation.CalcRadiusByAge(Age, Lifespan);
+            
+            if (State == CellState.Isolated)
+                return;
+            
             Velocity = CalcVelocity();
             Position += Direction * (float)Velocity;
             
@@ -151,17 +156,20 @@ namespace LifeProj
             if (Age - LastCoitus < CoitusRelaxation || cell.Age - cell.LastCoitus < cell.CoitusRelaxation)
                 return false;
 
-            if (Simulation.NextDouble(0.0, 1.0) < Simulation.ChanceOfBirth)
-                return false;
-
-            LastCoitus = Age;
-            CoitusRelaxation = Simulation.NextInt(Simulation.CoitusRelaxationMin, Simulation.CoitusRelaxationMax);
-            LastCoitusCell = cell;
+            if (Simulation.NextDouble(0.0, 1.0) < Simulation.ChanceOfBirth *
+                (1.0 - (double)Parent.Cells.Count / Simulation.CellsCountMax))
+            {
+                LastCoitus = Age;
+                CoitusRelaxation = Simulation.NextInt(Simulation.CoitusRelaxationMin, Simulation.CoitusRelaxationMax);
+                LastCoitusCell = cell;
             
-            cell.LastCoitus = cell.Age;
-            cell.CoitusRelaxation = Simulation.NextInt(Simulation.CoitusRelaxationMin, Simulation.CoitusRelaxationMax);
-            cell.LastCoitusCell = this;
-            return true;
+                cell.LastCoitus = cell.Age;
+                cell.CoitusRelaxation = Simulation.NextInt(Simulation.CoitusRelaxationMin, Simulation.CoitusRelaxationMax);
+                cell.LastCoitusCell = this;
+                return true;
+            }
+
+            return false;
         }
     }
 }

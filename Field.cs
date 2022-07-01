@@ -96,6 +96,12 @@ namespace LifeProj
         {
             return DeathByInfectionCellsCount;
         }
+        
+        public int GetIsolatedCellsCount()
+        {
+            return Cells.FindAll(x => x.State == CellState.Isolated).Count;
+        }
+        
 
         void SpawnCell()
         {
@@ -114,7 +120,7 @@ namespace LifeProj
         {
             IterationsCount += 1;
             Parallel.ForEach(Cells.ToArray(), IterCell);
-            
+
             foreach (var cell in Cells.ToArray())
             {
                 if (cell.State == CellState.DeathByInfection)
@@ -122,7 +128,7 @@ namespace LifeProj
                     Cells.Remove(cell);
                     DeathByInfectionCellsCount++;
                 }
-                
+
                 if (cell.State == CellState.DeathByAge)
                 {
                     Cells.Remove(cell);
@@ -140,13 +146,14 @@ namespace LifeProj
             }
             else
             {
+                foreach (var cell in Cells.FindAll(x => x.State == CellState.Infected).Take(Simulation.MedicinePlacesCount - GetIsolatedCellsCount()))
+                    cell.State = CellState.Isolated;
+                
                 if (--LockdownDuration == 0)
                     IsLockdown = false;
             }
-
-            
         }
-        
+
         private void IterCell(Cell cell)
         {
             if(cell.State == CellState.DeathByInfection || cell.State == CellState.DeathByAge)
@@ -155,9 +162,7 @@ namespace LifeProj
             cell.NextIter();
 
             if (cell.State == CellState.Isolated)
-            {
-                
-            }
+                return;
 
             foreach (var otherCell in Cells.ToArray())
             {
@@ -165,6 +170,9 @@ namespace LifeProj
                     continue;
 
                 if (otherCell == null)
+                    continue;
+
+                if (otherCell.State == CellState.Isolated)
                     continue;
 
                 if(cell.State == CellState.DeathByInfection || cell.State == CellState.DeathByAge)

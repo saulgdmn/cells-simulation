@@ -60,10 +60,10 @@ namespace LifeProj
     {
         public static ThreadSafeRandom Rand = new ThreadSafeRandom();
 
-        public static double SimulationTick = 10.0;
+        public static double SimulationTick = 20.0;
         public static int FieldWidth = 1500;                   // pixels
         public static int FieldHeight = 900;                  // poxels
-        public static int OnInitCellsCount = 300;             // count
+        public static int OnInitCellsCount = 500;             // count
         public static int OnInitInfectedCellsCount = 5;     // count
         public static double CellRadiusMin = 1.0;             // distance
         public static double CellRadiusMax = 8.0;             // distance
@@ -82,10 +82,10 @@ namespace LifeProj
         public static double VelocityMin = 0.5;              // distance
         public static double VelocityMax = 3.0;              // distance   
 
-        public static double Visibility = 10.0;               // distance
-        public static int InfectedAgeDecrementer = 1;      // iterations
-        
-        public static double ChanceOfBirth = 0.1;            // coefficient
+        public static int InfectedAgeDecrementer = 2;      // iterations
+
+        public static int CellsCountMax = 1000;
+        public static double ChanceOfBirth = 0.5;            // coefficient
         public static double ChanceOfDeathMin = 0.5;              // coefficient
         public static double ChanceOfDeathMax = 0.7;              // coefficient
         public static double ChanceOfInfectingMin = 0.1;     // coefficient
@@ -94,22 +94,24 @@ namespace LifeProj
         public static double DistanceOfInfectingPow = 20.0 * 20.0;   // distance
         public static double DistanceOfCoitusPow = 20.0 * 20.0;
         
-        public static int IncubationPeriodMin = 400;         // iterations
-        public static int IncubationPeriodMax = 800;         // iterations
-        public static int InfectionPeriodMin = 1000;
-        public static int InfectionPeriodMax = 2000;
+        public static int IncubationPeriodMin = 800;         // iterations
+        public static int IncubationPeriodMax = 2000;         // iterations
+        public static int InfectionPeriodMin = 600;
+        public static int InfectionPeriodMax = 1500;
         
-        public static double LockdownInfectedRate = 0.1;      // coefficient
+        public static double LockdownInfectedRate = 0.3;      // coefficient
         public static double LockdownSlowdown = 0.9;          // coefficient
         public static int LockdownDuration = 3000;             // iterations
         public static double VaccinationBoost = 0.3;    // coefficient
-        public static int MedicinePlacesCount = 250;          // count
+        public static int MedicinePlacesCount = 100;          // count
         public static double MedicineEfficiency = 0.1;        // coefficient
 
+        public static Pen BorderPen = new Pen(Color.Black);
         public static SolidBrush HealthyBrush = new SolidBrush(Color.DarkGreen);
         public static SolidBrush InfectedBrush = new SolidBrush(Color.DarkRed);
         public static SolidBrush IncubationBrush = new SolidBrush(Color.Yellow);
         public static SolidBrush RecoveredBrush = new SolidBrush(Color.DarkBlue);
+        public static SolidBrush IsolatedBrush = new SolidBrush(Color.DarkRed);
         
         public static Font MetricsFont = new Font("Consolas", 8);
         public static SolidBrush MetricsBrush = new SolidBrush(Color.Black);
