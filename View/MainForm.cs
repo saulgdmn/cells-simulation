@@ -30,6 +30,7 @@ namespace LifeProj.View {
             Simulation.FieldWidth = simulationPanel.Width - 2;
             Simulation.FieldHeight = simulationPanel.Height - 2;
             _field = new Field();
+            _simulationRunning = false;
         }
         
         private void SetupRenderingThread()
@@ -109,39 +110,29 @@ namespace LifeProj.View {
         }
 
         private void startButton_Click(object sender, EventArgs e){
-            resetButton.Enabled = true;
-            pauseButton.Enabled = true;
-            startButton.Enabled = false;
-            continueButton.Enabled = false;
-            
-            _field.Init();
-            SetupRenderingThread();
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-        }
 
-        private void resetButton_Click(object sender, EventArgs e) {
-            startButton.Enabled = true;
-            resetButton.Enabled = false;
-            pauseButton.Enabled = false;
-            continueButton.Enabled = false;
-
-            _simulationRunning = false;
-            _renderingThread.Abort();
-            _field.Reset();
-            simulationPanel.Refresh();
-            FormBorderStyle = FormBorderStyle.Sizable;
+            if (_simulationRunning){
+                _simulationRunning = false;
+                _renderingThread.Abort();
+                _field.Reset();
+                simulationPanel.Refresh();
+                FormBorderStyle = FormBorderStyle.Sizable;
+                startButton.Text = "Start";
+                pauseButton.Enabled = false;
+                _simulationPaused = false;
+                pauseButton.Text = "Pause";
+            }else{
+                _field.Init();
+                FormBorderStyle = FormBorderStyle.FixedSingle;
+                SetupRenderingThread();
+                startButton.Text = "Reset";
+                pauseButton.Enabled = true;
+            }
         }
 
         private void pauseButton_Click(object sender, EventArgs e) {
-            pauseButton.Enabled = false;
-            continueButton.Enabled = true;
-            _simulationPaused = true;
-        }
-
-        private void continueButton_Click(object sender, EventArgs e) {
-            pauseButton.Enabled = true;
-            continueButton.Enabled = false;
-            _simulationPaused = false;
+            pauseButton.Text = _simulationPaused ? "Pause" : "Continue";
+            _simulationPaused = !_simulationPaused;
         }
 
         private void MainForm_Resize(object sender, EventArgs e){
