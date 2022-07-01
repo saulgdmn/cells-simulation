@@ -15,6 +15,8 @@ namespace LifeProj.View {
         private Thread _renderingThread;
 
         private volatile bool _simulationRunning;
+        private volatile bool _simulationPaused;
+
         
         public MainForm(){
             
@@ -32,9 +34,14 @@ namespace LifeProj.View {
         
         private void SetupRenderingThread()
         {
+            _simulationPaused = false;
             _simulationRunning = true;
             _renderingThread = new Thread(() => {
                 while (_simulationRunning){
+                    
+                    while (_simulationPaused){
+                        Thread.Sleep(50);
+                    }
                     var loopIterWatch = new Stopwatch();
                     var nextIterWatch = new Stopwatch();
 
@@ -128,11 +135,13 @@ namespace LifeProj.View {
         private void pauseButton_Click(object sender, EventArgs e) {
             pauseButton.Enabled = false;
             continueButton.Enabled = true;
+            _simulationPaused = true;
         }
 
         private void continueButton_Click(object sender, EventArgs e) {
             pauseButton.Enabled = true;
             continueButton.Enabled = false;
+            _simulationPaused = false;
         }
 
         private void MainForm_Resize(object sender, EventArgs e){
