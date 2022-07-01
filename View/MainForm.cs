@@ -98,5 +98,30 @@ namespace LifeProj.View {
                 "DeathByInfectionCellsCount: " + _field.GetDeathByInfectionCellsCount(),
                 Simulation.MetricsFont, Simulation.MetricsBrush, 2, 2, drawFormat);
         }
+
+        private void startButton_Click(object sender, EventArgs e){
+            resetButton.Enabled = true;
+            pauseButton.Enabled = true;
+            startButton.Enabled = false;
+            continueButton.Enabled = false;
+            
+        }
+
+        private void resetButton_Click(object sender, EventArgs e) {
+            startButton.Enabled = true;
+            resetButton.Enabled = false;
+            pauseButton.Enabled = false;
+            continueButton.Enabled = false;
+        }
+
+        private void pauseButton_Click(object sender, EventArgs e) {
+            pauseButton.Enabled = false;
+            continueButton.Enabled = true;
+        }
+
+        private void continueButton_Click(object sender, EventArgs e) {
+            pauseButton.Enabled = true;
+            continueButton.Enabled = false;
+        }
     }
 }
