@@ -27,15 +27,15 @@ namespace LifeProj.View {
                 ControlStyles.DoubleBuffer, 
                 true);
             
-            Simulation.FieldWidth = simulationPanel.Width - 2;
-            Simulation.FieldHeight = simulationPanel.Height - 2;
-            FieldHeightTextBox.Text = (simulationPanel.Height - 2).ToString();
-            FieldWidthTextBox.Text = (simulationPanel.Width - 2).ToString();
+            Simulation.FieldWidth = SimulationPanel.Width - 2;
+            Simulation.FieldHeight = SimulationPanel.Height - 2;
+            FieldHeightInput.Text = (SimulationPanel.Height - 2).ToString();
+            FieldWidthInput.Text = (SimulationPanel.Width - 2).ToString();
             _field = new Field();
             _simulationRunning = false;
 
-            CellsOnStartTextBox.Text = Simulation.OnInitCellsCount.ToString();
-            InfectedCellsTextBox.Text = Simulation.OnInitInfectedCellsCount.ToString();
+            CellsOnStartInput.Text = Simulation.OnInitCellsCount.ToString();
+            InfectedCellsInput.Text = Simulation.OnInitInfectedCellsCount.ToString();
         }
         
         private void SetupRenderingThread()
@@ -59,7 +59,7 @@ namespace LifeProj.View {
                     nextIterWatch.Stop();
                     _nextIterElapsed = nextIterWatch.Elapsed.TotalMilliseconds;
                 
-                    simulationPanel.Invoke((MethodInvoker) delegate { simulationPanel.Refresh(); });
+                    SimulationPanel.Invoke((MethodInvoker) delegate { SimulationPanel.Refresh(); });
                     while (loopIterWatch.Elapsed.TotalMilliseconds < Simulation.SimulationTick) { }
 
                     loopIterWatch.Stop();
@@ -120,42 +120,41 @@ namespace LifeProj.View {
                 _simulationRunning = false;
                 _renderingThread.Abort();
                 _field.Reset();
-                simulationPanel.Refresh();
+                SimulationPanel.Refresh();
                 FormBorderStyle = FormBorderStyle.Sizable;
-                startButton.Text = "Start";
-                pauseButton.Enabled = false;
+                StartButton.Text = "Start";
+                PauseButton.Enabled = false;
                 _simulationPaused = false;
-                pauseButton.Text = "Pause";
+                PauseButton.Text = "Pause";
             }else{
                 SetupSimulationProperties();
                 _field.Init();
                 FormBorderStyle = FormBorderStyle.FixedSingle;
                 SetupRenderingThread();
-                startButton.Text = "Reset";
-                pauseButton.Enabled = true;
+                StartButton.Text = "Reset";
+                PauseButton.Enabled = true;
             }
         }
 
         private void pauseButton_Click(object sender, EventArgs e) {
-            pauseButton.Text = _simulationPaused ? "Pause" : "Continue";
+            PauseButton.Text = _simulationPaused ? "Pause" : "Continue";
             _simulationPaused = !_simulationPaused;
         }
 
         private void MainForm_Resize(object sender, EventArgs e){
-            Simulation.FieldWidth = simulationPanel.Width - 2;
-            Simulation.FieldHeight = simulationPanel.Height - 2;
+            Simulation.FieldWidth = SimulationPanel.Width - 2;
+            Simulation.FieldHeight = SimulationPanel.Height - 2;
 
-            FieldHeightTextBox.Text = (simulationPanel.Height - 2).ToString();
-            FieldWidthTextBox.Text = (simulationPanel.Width - 2).ToString();
-            simulationPanel.Refresh();
+            FieldHeightInput.Text = (SimulationPanel.Height - 2).ToString();
+            FieldWidthInput.Text = (SimulationPanel.Width - 2).ToString();
+            SimulationPanel.Refresh();
         }
 
         // TODO add validation
         private void SetupSimulationProperties()
         {
-            Simulation.OnInitCellsCount = int.Parse(CellsOnStartTextBox.Text);
-            Simulation.OnInitInfectedCellsCount = int.Parse(InfectedCellsTextBox.Text);
+            Simulation.OnInitCellsCount = int.Parse(CellsOnStartInput.Text);
+            Simulation.OnInitInfectedCellsCount = int.Parse(InfectedCellsInput.Text);
         }
-
     }
 }
