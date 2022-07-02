@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace LifeProj.View {
     
@@ -35,7 +36,9 @@ namespace LifeProj.View {
             _simulationRunning = false;
 
             CellsOnStartInput.Text = Simulation.OnInitCellsCount.ToString();
-            InfectedCellsInput.Text = Simulation.OnInitInfectedCellsCount.ToString();
+            InfectedCellsInput.Value = Simulation.OnInitInfectedCellsCount;
+
+            SetupInputs();
         }
         
         private void SetupRenderingThread()
@@ -150,11 +153,58 @@ namespace LifeProj.View {
             SimulationPanel.Refresh();
         }
 
-        // TODO add validation
+        // TODO add validation ?
         private void SetupSimulationProperties()
         {
-            Simulation.OnInitCellsCount = int.Parse(CellsOnStartInput.Text);
-            Simulation.OnInitInfectedCellsCount = int.Parse(InfectedCellsInput.Text);
+            Simulation.OnInitCellsCount =  decimal.ToInt32(CellsOnStartInput.Value);
+            Simulation.OnInitInfectedCellsCount = decimal.ToInt32(InfectedCellsInput.Value);
+         
+            Simulation.ChanceOfBirth = decimal.ToDouble(ChanceOfBirthInput.Value);
+            
+            Simulation.AgeMin = decimal.ToInt32(AgeMinInput.Value);
+            Simulation.AgeMax = decimal.ToInt32(AgeMaxInput.Value);
+            
+            Simulation.LifespanMin = decimal.ToInt32(LifespanMinInput.Value);
+            Simulation.LifespanMax = decimal.ToInt32(LifespanMaxInput.Value);
+            
+            Simulation.CoitusRelaxationMin = decimal.ToInt32(CoitusRelaxationMinInput.Value); 
+            Simulation.CoitusRelaxationMax = decimal.ToInt32(CoitusRelaxationMaxInput.Value);
+            
+            Simulation.CellRadiusMin = decimal.ToDouble(CellRadiusMinInput.Value);
+            Simulation.CellRadiusMax = decimal.ToDouble(CellRadiusMaxInput.Value);
+            
+            Simulation.ChanceOfDeathMin = decimal.ToDouble(DeathMinInput.Value); 
+            Simulation.ChanceOfDeathMax = decimal.ToDouble(DeathMaxInput.Value); 
+            
+            Simulation.ImmunityMin = decimal.ToDouble(ImmunityMinInput.Value); 
+            Simulation.ImmunityMax = decimal.ToDouble(ImmunityMaxInput.Value); 
+            
+        }
+        
+        private void SetupInputs() {
+            
+            CellsOnStartInput.Value = Simulation.OnInitCellsCount;
+            InfectedCellsInput.Value = Simulation.OnInitInfectedCellsCount;
+
+            ChanceOfBirthInput.Value = Convert.ToDecimal(Simulation.ChanceOfBirth);
+            
+            AgeMinInput.Value = Simulation.AgeMin;
+            AgeMaxInput.Value = Simulation.AgeMax;
+
+            LifespanMinInput.Value = Simulation.LifespanMin;
+            LifespanMaxInput.Value = Simulation.LifespanMax;
+
+            CoitusRelaxationMinInput.Value = Simulation.CoitusRelaxationMin;
+            CoitusRelaxationMaxInput.Value = Simulation.CoitusRelaxationMax;
+            
+            CellRadiusMinInput.Value = Convert.ToDecimal(Simulation.CellRadiusMin); 
+            CellRadiusMaxInput.Value = Convert.ToDecimal(Simulation.CellRadiusMax); 
+
+            DeathMinInput.Value = Convert.ToDecimal(Simulation.ChanceOfDeathMin); 
+            DeathMaxInput.Value = Convert.ToDecimal(Simulation.ChanceOfDeathMax);
+
+            ImmunityMinInput.Value = Convert.ToDecimal(Simulation.ImmunityMin);
+            ImmunityMaxInput.Value = Convert.ToDecimal(Simulation.ImmunityMax);
         }
     }
 }
