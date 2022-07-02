@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
-using System.Globalization;
 
 namespace LifeProj.View {
     
@@ -179,6 +178,25 @@ namespace LifeProj.View {
             Simulation.ImmunityMin = decimal.ToDouble(ImmunityMinInput.Value); 
             Simulation.ImmunityMax = decimal.ToDouble(ImmunityMaxInput.Value); 
             
+            Simulation.ChanceOfInfectingMax = decimal.ToDouble(InfectingMaxInput.Value);
+            Simulation.ChanceOfInfectingMin = decimal.ToDouble(InfectingMinInput.Value);
+            
+            Simulation.IncubationPeriodMin = decimal.ToInt32(IncubationPeriodMinInput.Value);
+            Simulation.IncubationPeriodMax = decimal.ToInt32(IncubationPeriodMaxInput.Value);
+            
+            Simulation.InfectionPeriodMin = decimal.ToInt32(InfectionPeriodMinInput.Value);
+            Simulation.InfectionPeriodMax = decimal.ToInt32(InfectionPeriodMaxInput.Value);
+
+            Simulation.LockdownInfectedRate = decimal.ToDouble(LockdownInfectedRateInput.Value);
+            Simulation.LockdownSlowdown = decimal.ToDouble(LockdownSlowdownInput.Value);
+            Simulation.LockdownDuration = decimal.ToInt32(LockdownDurationInput.Value);
+            Simulation.VaccinationBoost = decimal.ToDouble(VaccinationBoostInput.Value);
+            Simulation.DistanceOfInfectingPow = decimal.ToDouble(DistanceOfInfectingInput.Value);
+            
+            Simulation.MedicinePlacesCount = decimal.ToInt32(MedicinePlacesCountInput.Value);
+            Simulation.MedicineEfficiency = decimal.ToDouble(MedicineEfficiencyInput.Value);
+
+            Simulation.InfectedAgeDecrementer = decimal.ToInt32( InfectedAgeDecrementerInput.Value);
         }
         
         private void SetupInputs() {
@@ -205,6 +223,26 @@ namespace LifeProj.View {
 
             ImmunityMinInput.Value = Convert.ToDecimal(Simulation.ImmunityMin);
             ImmunityMaxInput.Value = Convert.ToDecimal(Simulation.ImmunityMax);
+            
+            InfectingMaxInput.Value = Convert.ToDecimal(Simulation.ChanceOfInfectingMax);
+            InfectingMinInput.Value = Convert.ToDecimal(Simulation.ChanceOfInfectingMin);
+            
+            IncubationPeriodMinInput.Value = Simulation.IncubationPeriodMin;
+            IncubationPeriodMaxInput.Value = Simulation.IncubationPeriodMax;
+            
+            InfectionPeriodMinInput.Value = Simulation.InfectionPeriodMin;
+            InfectionPeriodMaxInput.Value = Simulation.InfectionPeriodMax;
+            
+            LockdownInfectedRateInput.Value = Convert.ToDecimal(Simulation.LockdownInfectedRate);
+            LockdownSlowdownInput.Value = Convert.ToDecimal(Simulation.LockdownSlowdown);
+            LockdownDurationInput.Value = Simulation.LockdownDuration;
+            VaccinationBoostInput.Value = Convert.ToDecimal(Simulation.VaccinationBoost);
+            DistanceOfInfectingInput.Value = Convert.ToDecimal(Simulation.DistanceOfInfectingPow);
+            
+            MedicinePlacesCountInput.Value = Simulation.MedicinePlacesCount;
+            MedicineEfficiencyInput.Value = Convert.ToDecimal(Simulation.MedicineEfficiency);
+            
+            InfectedAgeDecrementerInput.Value = Simulation.InfectedAgeDecrementer;
         }
     }
 }
