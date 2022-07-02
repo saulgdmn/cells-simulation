@@ -197,6 +197,11 @@ namespace LifeProj.View {
             Simulation.MedicineEfficiency = decimal.ToDouble(MedicineEfficiencyInput.Value);
 
             Simulation.InfectedAgeDecrementer = decimal.ToInt32( InfectedAgeDecrementerInput.Value);
+            
+            Simulation.VelocityMin = decimal.ToDouble(VelocityMinInput.Value);
+            Simulation.VelocityMax = decimal.ToDouble(VelocityMaxInput.Value);
+            
+            Simulation.DistanceOfCoitusPow =decimal.ToDouble(DistanceOfCoitusInput.Value);
         }
         
         private void SetupInputs() {
@@ -243,6 +248,11 @@ namespace LifeProj.View {
             MedicineEfficiencyInput.Value = Convert.ToDecimal(Simulation.MedicineEfficiency);
             
             InfectedAgeDecrementerInput.Value = Simulation.InfectedAgeDecrementer;
+            
+            VelocityMinInput.Value = Convert.ToDecimal(Simulation.VelocityMin);
+            VelocityMaxInput.Value = Convert.ToDecimal(Simulation.VelocityMax);
+            
+            DistanceOfCoitusInput.Value = Convert.ToDecimal(Simulation.DistanceOfCoitusPow);
         }
     }
 }

@@ -45,8 +45,14 @@
             this.InfectedCellsLabel = new System.Windows.Forms.Label();
             this.CellsOnStartLabel = new System.Windows.Forms.Label();
             this.CellsTabPage = new System.Windows.Forms.TabPage();
-            this.CellsPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.CellsPropertiesLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.DistanceOfCoitusInput = new System.Windows.Forms.NumericUpDown();
+            this.DistanceOfCoitusLabel = new System.Windows.Forms.Label();
+            this.VelocityMaxLabel = new System.Windows.Forms.Label();
+            this.VelocityMinLabel = new System.Windows.Forms.Label();
+            this.VelocityMaxInput = new System.Windows.Forms.NumericUpDown();
+            this.VelocityMinInput = new System.Windows.Forms.NumericUpDown();
+            this.VelocityLabel = new System.Windows.Forms.Label();
             this.CellRadiusMaxInput = new System.Windows.Forms.NumericUpDown();
             this.CellRadiusMinInput = new System.Windows.Forms.NumericUpDown();
             this.CoitusRelaxationMaxInput = new System.Windows.Forms.NumericUpDown();
@@ -77,8 +83,8 @@
             this.CoitusRelaxationMaxLabel = new System.Windows.Forms.Label();
             this.CoitusRelaxationMinLabel = new System.Windows.Forms.Label();
             this.CellRadiusLabel = new System.Windows.Forms.Label();
-            this.ChanceOfBirthInput = new System.Windows.Forms.NumericUpDown();
             this.DeathMaxInput = new System.Windows.Forms.NumericUpDown();
+            this.ChanceOfBirthInput = new System.Windows.Forms.NumericUpDown();
             this.VirusTabPage = new System.Windows.Forms.TabPage();
             this.VirusLayout = new System.Windows.Forms.TableLayoutPanel();
             this.InfectedAgeDecrementerInput = new System.Windows.Forms.NumericUpDown();
@@ -123,8 +129,10 @@
             ((System.ComponentModel.ISupportInitialize) (this.InfectedCellsInput)).BeginInit();
             this.FieldSizeLayout.SuspendLayout();
             this.CellsTabPage.SuspendLayout();
-            this.CellsPropertiesGroupBox.SuspendLayout();
             this.CellsPropertiesLayout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.DistanceOfCoitusInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.VelocityMaxInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.VelocityMinInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.CellRadiusMaxInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.CellRadiusMinInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.CoitusRelaxationMaxInput)).BeginInit();
@@ -136,8 +144,8 @@
             ((System.ComponentModel.ISupportInitialize) (this.AgeMaxInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.AgeMinInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.DeathMinInput)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.ChanceOfBirthInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.DeathMaxInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.ChanceOfBirthInput)).BeginInit();
             this.VirusTabPage.SuspendLayout();
             this.VirusLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) (this.InfectedAgeDecrementerInput)).BeginInit();
@@ -405,25 +413,16 @@
             // 
             // CellsTabPage
             // 
-            this.CellsTabPage.Controls.Add(this.CellsPropertiesGroupBox);
-            this.CellsTabPage.Location = new System.Drawing.Point(4, 22);
+            this.CellsTabPage.AllowDrop = true;
+            this.CellsTabPage.AutoScroll = true;
+            this.CellsTabPage.Controls.Add(this.CellsPropertiesLayout);
+            this.CellsTabPage.Location = new System.Drawing.Point(4, 25);
             this.CellsTabPage.Name = "CellsTabPage";
             this.CellsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.CellsTabPage.Size = new System.Drawing.Size(316, 489);
+            this.CellsTabPage.Size = new System.Drawing.Size(316, 486);
             this.CellsTabPage.TabIndex = 1;
             this.CellsTabPage.Text = "Cells";
             this.CellsTabPage.UseVisualStyleBackColor = true;
-            // 
-            // CellsPropertiesGroupBox
-            // 
-            this.CellsPropertiesGroupBox.Controls.Add(this.CellsPropertiesLayout);
-            this.CellsPropertiesGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CellsPropertiesGroupBox.Location = new System.Drawing.Point(3, 3);
-            this.CellsPropertiesGroupBox.Name = "CellsPropertiesGroupBox";
-            this.CellsPropertiesGroupBox.Size = new System.Drawing.Size(310, 483);
-            this.CellsPropertiesGroupBox.TabIndex = 0;
-            this.CellsPropertiesGroupBox.TabStop = false;
-            this.CellsPropertiesGroupBox.Text = "Cells properties";
             // 
             // CellsPropertiesLayout
             // 
@@ -432,10 +431,17 @@
             this.CellsPropertiesLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.CellsPropertiesLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.CellsPropertiesLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.CellsPropertiesLayout.Controls.Add(this.CellRadiusMaxInput, 3, 13);
-            this.CellsPropertiesLayout.Controls.Add(this.CellRadiusMinInput, 1, 13);
-            this.CellsPropertiesLayout.Controls.Add(this.CoitusRelaxationMaxInput, 3, 11);
-            this.CellsPropertiesLayout.Controls.Add(this.CoitusRelaxationMinInput, 1, 11);
+            this.CellsPropertiesLayout.Controls.Add(this.DistanceOfCoitusInput, 2, 1);
+            this.CellsPropertiesLayout.Controls.Add(this.DistanceOfCoitusLabel, 0, 1);
+            this.CellsPropertiesLayout.Controls.Add(this.VelocityMaxLabel, 2, 11);
+            this.CellsPropertiesLayout.Controls.Add(this.VelocityMinLabel, 0, 11);
+            this.CellsPropertiesLayout.Controls.Add(this.VelocityMaxInput, 3, 11);
+            this.CellsPropertiesLayout.Controls.Add(this.VelocityMinInput, 1, 11);
+            this.CellsPropertiesLayout.Controls.Add(this.VelocityLabel, 0, 10);
+            this.CellsPropertiesLayout.Controls.Add(this.CellRadiusMaxInput, 3, 15);
+            this.CellsPropertiesLayout.Controls.Add(this.CellRadiusMinInput, 1, 15);
+            this.CellsPropertiesLayout.Controls.Add(this.CoitusRelaxationMaxInput, 3, 13);
+            this.CellsPropertiesLayout.Controls.Add(this.CoitusRelaxationMinInput, 1, 13);
             this.CellsPropertiesLayout.Controls.Add(this.ImmunityMaxInput, 3, 9);
             this.CellsPropertiesLayout.Controls.Add(this.ImmunityMinInput, 1, 9);
             this.CellsPropertiesLayout.Controls.Add(this.LifespanMaxInput, 3, 7);
@@ -456,48 +462,127 @@
             this.CellsPropertiesLayout.Controls.Add(this.LifespanLabel, 0, 6);
             this.CellsPropertiesLayout.Controls.Add(this.ChanceOfBirthLabel, 0, 0);
             this.CellsPropertiesLayout.Controls.Add(this.AgeLabel, 0, 4);
-            this.CellsPropertiesLayout.Controls.Add(this.CellRadiusMinLabel, 0, 13);
-            this.CellsPropertiesLayout.Controls.Add(this.CellRadiusMaxLabel, 2, 13);
-            this.CellsPropertiesLayout.Controls.Add(this.CoitusRelaxationLabel, 0, 10);
-            this.CellsPropertiesLayout.Controls.Add(this.CoitusRelaxationMaxLabel, 2, 11);
-            this.CellsPropertiesLayout.Controls.Add(this.CoitusRelaxationMinLabel, 0, 11);
-            this.CellsPropertiesLayout.Controls.Add(this.CellRadiusLabel, 0, 12);
-            this.CellsPropertiesLayout.Controls.Add(this.ChanceOfBirthInput, 1, 1);
+            this.CellsPropertiesLayout.Controls.Add(this.CellRadiusMinLabel, 0, 15);
+            this.CellsPropertiesLayout.Controls.Add(this.CellRadiusMaxLabel, 2, 15);
+            this.CellsPropertiesLayout.Controls.Add(this.CoitusRelaxationLabel, 0, 12);
+            this.CellsPropertiesLayout.Controls.Add(this.CoitusRelaxationMaxLabel, 2, 13);
+            this.CellsPropertiesLayout.Controls.Add(this.CoitusRelaxationMinLabel, 0, 13);
+            this.CellsPropertiesLayout.Controls.Add(this.CellRadiusLabel, 0, 14);
             this.CellsPropertiesLayout.Controls.Add(this.DeathMaxInput, 3, 3);
-            this.CellsPropertiesLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CellsPropertiesLayout.Location = new System.Drawing.Point(3, 18);
+            this.CellsPropertiesLayout.Controls.Add(this.ChanceOfBirthInput, 2, 0);
+            this.CellsPropertiesLayout.Dock = System.Windows.Forms.DockStyle.Top;
+            this.CellsPropertiesLayout.Location = new System.Drawing.Point(3, 3);
             this.CellsPropertiesLayout.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.CellsPropertiesLayout.Name = "CellsPropertiesLayout";
             this.CellsPropertiesLayout.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.CellsPropertiesLayout.RowCount = 14;
-            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
-            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
-            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
-            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
-            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
-            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
-            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
-            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
-            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
-            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
-            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
-            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
-            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
-            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
+            this.CellsPropertiesLayout.RowCount = 16;
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
             this.CellsPropertiesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.CellsPropertiesLayout.Size = new System.Drawing.Size(304, 462);
+            this.CellsPropertiesLayout.Size = new System.Drawing.Size(293, 581);
             this.CellsPropertiesLayout.TabIndex = 0;
+            // 
+            // DistanceOfCoitusInput
+            // 
+            this.DistanceOfCoitusInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.CellsPropertiesLayout.SetColumnSpan(this.DistanceOfCoitusInput, 2);
+            this.DistanceOfCoitusInput.Increment = new decimal(new int[] {20, 0, 0, 0});
+            this.DistanceOfCoitusInput.Location = new System.Drawing.Point(154, 43);
+            this.DistanceOfCoitusInput.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.DistanceOfCoitusInput.Maximum = new decimal(new int[] {20000, 0, 0, 0});
+            this.DistanceOfCoitusInput.Name = "DistanceOfCoitusInput";
+            this.DistanceOfCoitusInput.Size = new System.Drawing.Size(124, 22);
+            this.DistanceOfCoitusInput.TabIndex = 14;
+            // 
+            // DistanceOfCoitusLabel
+            // 
+            this.DistanceOfCoitusLabel.BackColor = System.Drawing.Color.Transparent;
+            this.CellsPropertiesLayout.SetColumnSpan(this.DistanceOfCoitusLabel, 2);
+            this.DistanceOfCoitusLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DistanceOfCoitusLabel.Location = new System.Drawing.Point(10, 36);
+            this.DistanceOfCoitusLabel.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.DistanceOfCoitusLabel.Name = "DistanceOfCoitusLabel";
+            this.DistanceOfCoitusLabel.Size = new System.Drawing.Size(124, 36);
+            this.DistanceOfCoitusLabel.TabIndex = 2;
+            this.DistanceOfCoitusLabel.Text = "distance of coitus";
+            this.DistanceOfCoitusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // VelocityMaxLabel
+            // 
+            this.VelocityMaxLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.VelocityMaxLabel.Location = new System.Drawing.Point(147, 399);
+            this.VelocityMaxLabel.Margin = new System.Windows.Forms.Padding(3, 3, 1, 3);
+            this.VelocityMaxLabel.Name = "VelocityMaxLabel";
+            this.VelocityMaxLabel.Size = new System.Drawing.Size(68, 30);
+            this.VelocityMaxLabel.TabIndex = 4;
+            this.VelocityMaxLabel.Text = "Max";
+            this.VelocityMaxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // VelocityMinLabel
+            // 
+            this.VelocityMinLabel.Location = new System.Drawing.Point(3, 396);
+            this.VelocityMinLabel.Name = "VelocityMinLabel";
+            this.VelocityMinLabel.Size = new System.Drawing.Size(66, 36);
+            this.VelocityMinLabel.TabIndex = 1;
+            this.VelocityMinLabel.Text = "Min";
+            this.VelocityMinLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // VelocityMaxInput
+            // 
+            this.VelocityMaxInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.VelocityMaxInput.DecimalPlaces = 1;
+            this.VelocityMaxInput.Location = new System.Drawing.Point(219, 403);
+            this.VelocityMaxInput.Name = "VelocityMaxInput";
+            this.VelocityMaxInput.Size = new System.Drawing.Size(66, 22);
+            this.VelocityMaxInput.TabIndex = 19;
+            // 
+            // VelocityMinInput
+            // 
+            this.VelocityMinInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.VelocityMinInput.DecimalPlaces = 1;
+            this.VelocityMinInput.Increment = new decimal(new int[] {1, 0, 0, 65536});
+            this.VelocityMinInput.Location = new System.Drawing.Point(75, 403);
+            this.VelocityMinInput.Maximum = new decimal(new int[] {1, 0, 0, 0});
+            this.VelocityMinInput.Name = "VelocityMinInput";
+            this.VelocityMinInput.Size = new System.Drawing.Size(66, 22);
+            this.VelocityMinInput.TabIndex = 18;
+            // 
+            // VelocityLabel
+            // 
+            this.CellsPropertiesLayout.SetColumnSpan(this.VelocityLabel, 4);
+            this.VelocityLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.VelocityLabel.Location = new System.Drawing.Point(10, 363);
+            this.VelocityLabel.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.VelocityLabel.Name = "VelocityLabel";
+            this.VelocityLabel.Size = new System.Drawing.Size(268, 30);
+            this.VelocityLabel.TabIndex = 5;
+            this.VelocityLabel.Text = "Velocity";
+            this.VelocityLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // CellRadiusMaxInput
             // 
             this.CellRadiusMaxInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.CellRadiusMaxInput.DecimalPlaces = 1;
             this.CellRadiusMaxInput.Increment = new decimal(new int[] {1, 0, 0, 65536});
-            this.CellRadiusMaxInput.Location = new System.Drawing.Point(225, 428);
+            this.CellRadiusMaxInput.Location = new System.Drawing.Point(219, 549);
             this.CellRadiusMaxInput.Maximum = new decimal(new int[] {10, 0, 0, 0});
             this.CellRadiusMaxInput.Minimum = new decimal(new int[] {1, 0, 0, 0});
             this.CellRadiusMaxInput.Name = "CellRadiusMaxInput";
-            this.CellRadiusMaxInput.Size = new System.Drawing.Size(71, 22);
+            this.CellRadiusMaxInput.Size = new System.Drawing.Size(66, 22);
             this.CellRadiusMaxInput.TabIndex = 19;
             this.CellRadiusMaxInput.Value = new decimal(new int[] {1, 0, 0, 0});
             // 
@@ -506,11 +591,11 @@
             this.CellRadiusMinInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.CellRadiusMinInput.DecimalPlaces = 1;
             this.CellRadiusMinInput.Increment = new decimal(new int[] {1, 0, 0, 65536});
-            this.CellRadiusMinInput.Location = new System.Drawing.Point(77, 428);
+            this.CellRadiusMinInput.Location = new System.Drawing.Point(75, 549);
             this.CellRadiusMinInput.Maximum = new decimal(new int[] {10, 0, 0, 0});
             this.CellRadiusMinInput.Minimum = new decimal(new int[] {1, 0, 0, 0});
             this.CellRadiusMinInput.Name = "CellRadiusMinInput";
-            this.CellRadiusMinInput.Size = new System.Drawing.Size(68, 22);
+            this.CellRadiusMinInput.Size = new System.Drawing.Size(66, 22);
             this.CellRadiusMinInput.TabIndex = 18;
             this.CellRadiusMinInput.Value = new decimal(new int[] {1, 0, 0, 0});
             // 
@@ -518,20 +603,20 @@
             // 
             this.CoitusRelaxationMaxInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.CoitusRelaxationMaxInput.Increment = new decimal(new int[] {50, 0, 0, 0});
-            this.CoitusRelaxationMaxInput.Location = new System.Drawing.Point(225, 357);
+            this.CoitusRelaxationMaxInput.Location = new System.Drawing.Point(219, 475);
             this.CoitusRelaxationMaxInput.Maximum = new decimal(new int[] {20000, 0, 0, 0});
             this.CoitusRelaxationMaxInput.Name = "CoitusRelaxationMaxInput";
-            this.CoitusRelaxationMaxInput.Size = new System.Drawing.Size(71, 22);
+            this.CoitusRelaxationMaxInput.Size = new System.Drawing.Size(66, 22);
             this.CoitusRelaxationMaxInput.TabIndex = 18;
             // 
             // CoitusRelaxationMinInput
             // 
             this.CoitusRelaxationMinInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.CoitusRelaxationMinInput.Increment = new decimal(new int[] {50, 0, 0, 0});
-            this.CoitusRelaxationMinInput.Location = new System.Drawing.Point(77, 357);
+            this.CoitusRelaxationMinInput.Location = new System.Drawing.Point(75, 475);
             this.CoitusRelaxationMinInput.Maximum = new decimal(new int[] {20000, 0, 0, 0});
             this.CoitusRelaxationMinInput.Name = "CoitusRelaxationMinInput";
-            this.CoitusRelaxationMinInput.Size = new System.Drawing.Size(68, 22);
+            this.CoitusRelaxationMinInput.Size = new System.Drawing.Size(66, 22);
             this.CoitusRelaxationMinInput.TabIndex = 17;
             // 
             // ImmunityMaxInput
@@ -539,61 +624,59 @@
             this.ImmunityMaxInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.ImmunityMaxInput.DecimalPlaces = 1;
             this.ImmunityMaxInput.Increment = new decimal(new int[] {1, 0, 0, 65536});
-            this.ImmunityMaxInput.Location = new System.Drawing.Point(225, 293);
+            this.ImmunityMaxInput.Location = new System.Drawing.Point(219, 331);
             this.ImmunityMaxInput.Maximum = new decimal(new int[] {1, 0, 0, 0});
             this.ImmunityMaxInput.Name = "ImmunityMaxInput";
-            this.ImmunityMaxInput.Size = new System.Drawing.Size(71, 22);
+            this.ImmunityMaxInput.Size = new System.Drawing.Size(66, 22);
             this.ImmunityMaxInput.TabIndex = 18;
             // 
             // ImmunityMinInput
             // 
             this.ImmunityMinInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.ImmunityMinInput.DecimalPlaces = 1;
-            this.ImmunityMinInput.Increment = new decimal(new int[] {1, 0, 0, 65536});
-            this.ImmunityMinInput.Location = new System.Drawing.Point(77, 293);
-            this.ImmunityMinInput.Maximum = new decimal(new int[] {1, 0, 0, 0});
+            this.ImmunityMinInput.Location = new System.Drawing.Point(75, 331);
             this.ImmunityMinInput.Name = "ImmunityMinInput";
-            this.ImmunityMinInput.Size = new System.Drawing.Size(68, 22);
+            this.ImmunityMinInput.Size = new System.Drawing.Size(66, 22);
             this.ImmunityMinInput.TabIndex = 17;
             // 
             // LifespanMaxInput
             // 
             this.LifespanMaxInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.LifespanMaxInput.Increment = new decimal(new int[] {500, 0, 0, 0});
-            this.LifespanMaxInput.Location = new System.Drawing.Point(225, 229);
+            this.LifespanMaxInput.Location = new System.Drawing.Point(219, 259);
             this.LifespanMaxInput.Maximum = new decimal(new int[] {20000, 0, 0, 0});
             this.LifespanMaxInput.Name = "LifespanMaxInput";
-            this.LifespanMaxInput.Size = new System.Drawing.Size(71, 22);
+            this.LifespanMaxInput.Size = new System.Drawing.Size(66, 22);
             this.LifespanMaxInput.TabIndex = 17;
             // 
             // LifespanMinInput
             // 
             this.LifespanMinInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.LifespanMinInput.Increment = new decimal(new int[] {500, 0, 0, 0});
-            this.LifespanMinInput.Location = new System.Drawing.Point(77, 229);
+            this.LifespanMinInput.Location = new System.Drawing.Point(75, 259);
             this.LifespanMinInput.Maximum = new decimal(new int[] {20000, 0, 0, 0});
             this.LifespanMinInput.Name = "LifespanMinInput";
-            this.LifespanMinInput.Size = new System.Drawing.Size(68, 22);
+            this.LifespanMinInput.Size = new System.Drawing.Size(66, 22);
             this.LifespanMinInput.TabIndex = 16;
             // 
             // AgeMaxInput
             // 
             this.AgeMaxInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.AgeMaxInput.Increment = new decimal(new int[] {100, 0, 0, 0});
-            this.AgeMaxInput.Location = new System.Drawing.Point(225, 165);
+            this.AgeMaxInput.Location = new System.Drawing.Point(219, 187);
             this.AgeMaxInput.Maximum = new decimal(new int[] {5000, 0, 0, 0});
             this.AgeMaxInput.Name = "AgeMaxInput";
-            this.AgeMaxInput.Size = new System.Drawing.Size(71, 22);
+            this.AgeMaxInput.Size = new System.Drawing.Size(66, 22);
             this.AgeMaxInput.TabIndex = 16;
             // 
             // AgeMinInput
             // 
             this.AgeMinInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.AgeMinInput.Increment = new decimal(new int[] {100, 0, 0, 0});
-            this.AgeMinInput.Location = new System.Drawing.Point(77, 165);
+            this.AgeMinInput.Location = new System.Drawing.Point(75, 187);
             this.AgeMinInput.Maximum = new decimal(new int[] {5000, 0, 0, 0});
             this.AgeMinInput.Name = "AgeMinInput";
-            this.AgeMinInput.Size = new System.Drawing.Size(68, 22);
+            this.AgeMinInput.Size = new System.Drawing.Size(66, 22);
             this.AgeMinInput.TabIndex = 15;
             // 
             // DeathMinInput
@@ -601,18 +684,18 @@
             this.DeathMinInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.DeathMinInput.DecimalPlaces = 1;
             this.DeathMinInput.Increment = new decimal(new int[] {1, 0, 0, 65536});
-            this.DeathMinInput.Location = new System.Drawing.Point(77, 101);
+            this.DeathMinInput.Location = new System.Drawing.Point(75, 115);
             this.DeathMinInput.Maximum = new decimal(new int[] {1, 0, 0, 0});
             this.DeathMinInput.Name = "DeathMinInput";
-            this.DeathMinInput.Size = new System.Drawing.Size(68, 22);
+            this.DeathMinInput.Size = new System.Drawing.Size(66, 22);
             this.DeathMinInput.TabIndex = 14;
             // 
             // ImmunityMaxLabel
             // 
             this.ImmunityMaxLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ImmunityMaxLabel.Location = new System.Drawing.Point(151, 288);
+            this.ImmunityMaxLabel.Location = new System.Drawing.Point(147, 324);
             this.ImmunityMaxLabel.Name = "ImmunityMaxLabel";
-            this.ImmunityMaxLabel.Size = new System.Drawing.Size(68, 32);
+            this.ImmunityMaxLabel.Size = new System.Drawing.Size(66, 36);
             this.ImmunityMaxLabel.TabIndex = 3;
             this.ImmunityMaxLabel.Text = "Max";
             this.ImmunityMaxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -620,9 +703,9 @@
             // ChanceOfDeathMaxLabel
             // 
             this.ChanceOfDeathMaxLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChanceOfDeathMaxLabel.Location = new System.Drawing.Point(151, 96);
+            this.ChanceOfDeathMaxLabel.Location = new System.Drawing.Point(147, 108);
             this.ChanceOfDeathMaxLabel.Name = "ChanceOfDeathMaxLabel";
-            this.ChanceOfDeathMaxLabel.Size = new System.Drawing.Size(68, 32);
+            this.ChanceOfDeathMaxLabel.Size = new System.Drawing.Size(66, 36);
             this.ChanceOfDeathMaxLabel.TabIndex = 3;
             this.ChanceOfDeathMaxLabel.Text = "Max";
             this.ChanceOfDeathMaxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -630,9 +713,9 @@
             // ImmunityMinLabel
             // 
             this.ImmunityMinLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ImmunityMinLabel.Location = new System.Drawing.Point(3, 288);
+            this.ImmunityMinLabel.Location = new System.Drawing.Point(3, 324);
             this.ImmunityMinLabel.Name = "ImmunityMinLabel";
-            this.ImmunityMinLabel.Size = new System.Drawing.Size(68, 32);
+            this.ImmunityMinLabel.Size = new System.Drawing.Size(66, 36);
             this.ImmunityMinLabel.TabIndex = 0;
             this.ImmunityMinLabel.Text = "Min";
             this.ImmunityMinLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -641,10 +724,10 @@
             // 
             this.CellsPropertiesLayout.SetColumnSpan(this.ImmunityLabel, 4);
             this.ImmunityLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ImmunityLabel.Location = new System.Drawing.Point(10, 259);
+            this.ImmunityLabel.Location = new System.Drawing.Point(10, 291);
             this.ImmunityLabel.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.ImmunityLabel.Name = "ImmunityLabel";
-            this.ImmunityLabel.Size = new System.Drawing.Size(279, 26);
+            this.ImmunityLabel.Size = new System.Drawing.Size(268, 30);
             this.ImmunityLabel.TabIndex = 4;
             this.ImmunityLabel.Text = "Immunity ( 0-1 )";
             this.ImmunityLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -652,9 +735,9 @@
             // AgeMaxLabel
             // 
             this.AgeMaxLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AgeMaxLabel.Location = new System.Drawing.Point(151, 160);
+            this.AgeMaxLabel.Location = new System.Drawing.Point(147, 180);
             this.AgeMaxLabel.Name = "AgeMaxLabel";
-            this.AgeMaxLabel.Size = new System.Drawing.Size(68, 32);
+            this.AgeMaxLabel.Size = new System.Drawing.Size(66, 36);
             this.AgeMaxLabel.TabIndex = 3;
             this.AgeMaxLabel.Text = "Max";
             this.AgeMaxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -662,9 +745,9 @@
             // ChanceOfDeathMinLabel
             // 
             this.ChanceOfDeathMinLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChanceOfDeathMinLabel.Location = new System.Drawing.Point(3, 96);
+            this.ChanceOfDeathMinLabel.Location = new System.Drawing.Point(3, 108);
             this.ChanceOfDeathMinLabel.Name = "ChanceOfDeathMinLabel";
-            this.ChanceOfDeathMinLabel.Size = new System.Drawing.Size(68, 32);
+            this.ChanceOfDeathMinLabel.Size = new System.Drawing.Size(66, 36);
             this.ChanceOfDeathMinLabel.TabIndex = 0;
             this.ChanceOfDeathMinLabel.Text = "Min";
             this.ChanceOfDeathMinLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -673,10 +756,10 @@
             // 
             this.CellsPropertiesLayout.SetColumnSpan(this.ChanceOfDeathLabel, 4);
             this.ChanceOfDeathLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChanceOfDeathLabel.Location = new System.Drawing.Point(3, 67);
+            this.ChanceOfDeathLabel.Location = new System.Drawing.Point(3, 75);
             this.ChanceOfDeathLabel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 1);
             this.ChanceOfDeathLabel.Name = "ChanceOfDeathLabel";
-            this.ChanceOfDeathLabel.Size = new System.Drawing.Size(293, 28);
+            this.ChanceOfDeathLabel.Size = new System.Drawing.Size(282, 32);
             this.ChanceOfDeathLabel.TabIndex = 2;
             this.ChanceOfDeathLabel.Text = "chance of death ( 0-1 )";
             this.ChanceOfDeathLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -684,10 +767,10 @@
             // LifespanMaxLabel
             // 
             this.LifespanMaxLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LifespanMaxLabel.Location = new System.Drawing.Point(151, 227);
+            this.LifespanMaxLabel.Location = new System.Drawing.Point(147, 255);
             this.LifespanMaxLabel.Margin = new System.Windows.Forms.Padding(3, 3, 1, 3);
             this.LifespanMaxLabel.Name = "LifespanMaxLabel";
-            this.LifespanMaxLabel.Size = new System.Drawing.Size(70, 26);
+            this.LifespanMaxLabel.Size = new System.Drawing.Size(68, 30);
             this.LifespanMaxLabel.TabIndex = 3;
             this.LifespanMaxLabel.Text = "Max";
             this.LifespanMaxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -695,9 +778,9 @@
             // AgeMinLabel
             // 
             this.AgeMinLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AgeMinLabel.Location = new System.Drawing.Point(3, 160);
+            this.AgeMinLabel.Location = new System.Drawing.Point(3, 180);
             this.AgeMinLabel.Name = "AgeMinLabel";
-            this.AgeMinLabel.Size = new System.Drawing.Size(68, 32);
+            this.AgeMinLabel.Size = new System.Drawing.Size(66, 36);
             this.AgeMinLabel.TabIndex = 0;
             this.AgeMinLabel.Text = "Min";
             this.AgeMinLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -705,10 +788,10 @@
             // LifespanMinLabel
             // 
             this.LifespanMinLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LifespanMinLabel.Location = new System.Drawing.Point(3, 227);
+            this.LifespanMinLabel.Location = new System.Drawing.Point(3, 255);
             this.LifespanMinLabel.Margin = new System.Windows.Forms.Padding(3, 3, 1, 3);
             this.LifespanMinLabel.Name = "LifespanMinLabel";
-            this.LifespanMinLabel.Size = new System.Drawing.Size(70, 26);
+            this.LifespanMinLabel.Size = new System.Drawing.Size(68, 30);
             this.LifespanMinLabel.TabIndex = 0;
             this.LifespanMinLabel.Text = "Min";
             this.LifespanMinLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -718,10 +801,10 @@
             this.LifespanLabel.BackColor = System.Drawing.Color.Transparent;
             this.CellsPropertiesLayout.SetColumnSpan(this.LifespanLabel, 4);
             this.LifespanLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LifespanLabel.Location = new System.Drawing.Point(10, 195);
+            this.LifespanLabel.Location = new System.Drawing.Point(10, 219);
             this.LifespanLabel.Margin = new System.Windows.Forms.Padding(10, 3, 10, 1);
             this.LifespanLabel.Name = "LifespanLabel";
-            this.LifespanLabel.Size = new System.Drawing.Size(279, 28);
+            this.LifespanLabel.Size = new System.Drawing.Size(268, 32);
             this.LifespanLabel.TabIndex = 8;
             this.LifespanLabel.Text = "lifespan (iterations)";
             this.LifespanLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -729,24 +812,24 @@
             // ChanceOfBirthLabel
             // 
             this.ChanceOfBirthLabel.BackColor = System.Drawing.Color.Transparent;
-            this.CellsPropertiesLayout.SetColumnSpan(this.ChanceOfBirthLabel, 4);
+            this.CellsPropertiesLayout.SetColumnSpan(this.ChanceOfBirthLabel, 2);
             this.ChanceOfBirthLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChanceOfBirthLabel.Location = new System.Drawing.Point(10, 0);
             this.ChanceOfBirthLabel.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.ChanceOfBirthLabel.Name = "ChanceOfBirthLabel";
-            this.ChanceOfBirthLabel.Size = new System.Drawing.Size(279, 32);
+            this.ChanceOfBirthLabel.Size = new System.Drawing.Size(124, 36);
             this.ChanceOfBirthLabel.TabIndex = 1;
-            this.ChanceOfBirthLabel.Text = "chance of birth ( 0-1 )";
-            this.ChanceOfBirthLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ChanceOfBirthLabel.Text = "chance of birth (0-1)";
+            this.ChanceOfBirthLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // AgeLabel
             // 
             this.CellsPropertiesLayout.SetColumnSpan(this.AgeLabel, 4);
             this.AgeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AgeLabel.Location = new System.Drawing.Point(10, 131);
+            this.AgeLabel.Location = new System.Drawing.Point(10, 147);
             this.AgeLabel.Margin = new System.Windows.Forms.Padding(10, 3, 10, 1);
             this.AgeLabel.Name = "AgeLabel";
-            this.AgeLabel.Size = new System.Drawing.Size(279, 28);
+            this.AgeLabel.Size = new System.Drawing.Size(268, 32);
             this.AgeLabel.TabIndex = 6;
             this.AgeLabel.Text = "age (iterations)";
             this.AgeLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -754,10 +837,10 @@
             // CellRadiusMinLabel
             // 
             this.CellRadiusMinLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CellRadiusMinLabel.Location = new System.Drawing.Point(3, 419);
+            this.CellRadiusMinLabel.Location = new System.Drawing.Point(3, 543);
             this.CellRadiusMinLabel.Margin = new System.Windows.Forms.Padding(3, 3, 1, 3);
             this.CellRadiusMinLabel.Name = "CellRadiusMinLabel";
-            this.CellRadiusMinLabel.Size = new System.Drawing.Size(70, 40);
+            this.CellRadiusMinLabel.Size = new System.Drawing.Size(68, 35);
             this.CellRadiusMinLabel.TabIndex = 0;
             this.CellRadiusMinLabel.Text = "Min";
             this.CellRadiusMinLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -765,10 +848,10 @@
             // CellRadiusMaxLabel
             // 
             this.CellRadiusMaxLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CellRadiusMaxLabel.Location = new System.Drawing.Point(151, 419);
+            this.CellRadiusMaxLabel.Location = new System.Drawing.Point(147, 543);
             this.CellRadiusMaxLabel.Margin = new System.Windows.Forms.Padding(3, 3, 1, 3);
             this.CellRadiusMaxLabel.Name = "CellRadiusMaxLabel";
-            this.CellRadiusMaxLabel.Size = new System.Drawing.Size(70, 40);
+            this.CellRadiusMaxLabel.Size = new System.Drawing.Size(68, 35);
             this.CellRadiusMaxLabel.TabIndex = 3;
             this.CellRadiusMaxLabel.Text = "Max";
             this.CellRadiusMaxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -777,10 +860,11 @@
             // 
             this.CoitusRelaxationLabel.BackColor = System.Drawing.Color.Transparent;
             this.CellsPropertiesLayout.SetColumnSpan(this.CoitusRelaxationLabel, 4);
-            this.CoitusRelaxationLabel.Location = new System.Drawing.Point(10, 323);
+            this.CoitusRelaxationLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CoitusRelaxationLabel.Location = new System.Drawing.Point(10, 435);
             this.CoitusRelaxationLabel.Margin = new System.Windows.Forms.Padding(10, 3, 10, 1);
             this.CoitusRelaxationLabel.Name = "CoitusRelaxationLabel";
-            this.CoitusRelaxationLabel.Size = new System.Drawing.Size(213, 28);
+            this.CoitusRelaxationLabel.Size = new System.Drawing.Size(268, 32);
             this.CoitusRelaxationLabel.TabIndex = 12;
             this.CoitusRelaxationLabel.Text = "coitus relaxation";
             this.CoitusRelaxationLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -788,10 +872,10 @@
             // CoitusRelaxationMaxLabel
             // 
             this.CoitusRelaxationMaxLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CoitusRelaxationMaxLabel.Location = new System.Drawing.Point(151, 355);
+            this.CoitusRelaxationMaxLabel.Location = new System.Drawing.Point(147, 471);
             this.CoitusRelaxationMaxLabel.Margin = new System.Windows.Forms.Padding(3, 3, 1, 3);
             this.CoitusRelaxationMaxLabel.Name = "CoitusRelaxationMaxLabel";
-            this.CoitusRelaxationMaxLabel.Size = new System.Drawing.Size(70, 26);
+            this.CoitusRelaxationMaxLabel.Size = new System.Drawing.Size(68, 30);
             this.CoitusRelaxationMaxLabel.TabIndex = 3;
             this.CoitusRelaxationMaxLabel.Text = "Max";
             this.CoitusRelaxationMaxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -799,10 +883,10 @@
             // CoitusRelaxationMinLabel
             // 
             this.CoitusRelaxationMinLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CoitusRelaxationMinLabel.Location = new System.Drawing.Point(3, 355);
+            this.CoitusRelaxationMinLabel.Location = new System.Drawing.Point(3, 471);
             this.CoitusRelaxationMinLabel.Margin = new System.Windows.Forms.Padding(3, 3, 1, 3);
             this.CoitusRelaxationMinLabel.Name = "CoitusRelaxationMinLabel";
-            this.CoitusRelaxationMinLabel.Size = new System.Drawing.Size(70, 26);
+            this.CoitusRelaxationMinLabel.Size = new System.Drawing.Size(68, 30);
             this.CoitusRelaxationMinLabel.TabIndex = 0;
             this.CoitusRelaxationMinLabel.Text = "Min";
             this.CoitusRelaxationMinLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -812,37 +896,37 @@
             this.CellRadiusLabel.BackColor = System.Drawing.Color.Transparent;
             this.CellsPropertiesLayout.SetColumnSpan(this.CellRadiusLabel, 4);
             this.CellRadiusLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CellRadiusLabel.Location = new System.Drawing.Point(10, 387);
+            this.CellRadiusLabel.Location = new System.Drawing.Point(10, 507);
             this.CellRadiusLabel.Margin = new System.Windows.Forms.Padding(10, 3, 10, 1);
             this.CellRadiusLabel.Name = "CellRadiusLabel";
-            this.CellRadiusLabel.Size = new System.Drawing.Size(279, 28);
+            this.CellRadiusLabel.Size = new System.Drawing.Size(268, 32);
             this.CellRadiusLabel.TabIndex = 10;
             this.CellRadiusLabel.Text = "cell radius  ( 1-10 )";
             this.CellRadiusLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // ChanceOfBirthInput
-            // 
-            this.ChanceOfBirthInput.Anchor = ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.CellsPropertiesLayout.SetColumnSpan(this.ChanceOfBirthInput, 2);
-            this.ChanceOfBirthInput.DecimalPlaces = 1;
-            this.ChanceOfBirthInput.Increment = new decimal(new int[] {1, 0, 0, 65536});
-            this.ChanceOfBirthInput.Location = new System.Drawing.Point(84, 35);
-            this.ChanceOfBirthInput.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.ChanceOfBirthInput.Maximum = new decimal(new int[] {1, 0, 0, 0});
-            this.ChanceOfBirthInput.Name = "ChanceOfBirthInput";
-            this.ChanceOfBirthInput.Size = new System.Drawing.Size(128, 22);
-            this.ChanceOfBirthInput.TabIndex = 13;
             // 
             // DeathMaxInput
             // 
             this.DeathMaxInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.DeathMaxInput.DecimalPlaces = 1;
             this.DeathMaxInput.Increment = new decimal(new int[] {1, 0, 0, 65536});
-            this.DeathMaxInput.Location = new System.Drawing.Point(225, 101);
+            this.DeathMaxInput.Location = new System.Drawing.Point(219, 115);
             this.DeathMaxInput.Maximum = new decimal(new int[] {1, 0, 0, 0});
             this.DeathMaxInput.Name = "DeathMaxInput";
-            this.DeathMaxInput.Size = new System.Drawing.Size(71, 22);
+            this.DeathMaxInput.Size = new System.Drawing.Size(66, 22);
             this.DeathMaxInput.TabIndex = 15;
+            // 
+            // ChanceOfBirthInput
+            // 
+            this.ChanceOfBirthInput.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.CellsPropertiesLayout.SetColumnSpan(this.ChanceOfBirthInput, 2);
+            this.ChanceOfBirthInput.DecimalPlaces = 1;
+            this.ChanceOfBirthInput.Increment = new decimal(new int[] {1, 0, 0, 65536});
+            this.ChanceOfBirthInput.Location = new System.Drawing.Point(154, 7);
+            this.ChanceOfBirthInput.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.ChanceOfBirthInput.Maximum = new decimal(new int[] {1, 0, 0, 0});
+            this.ChanceOfBirthInput.Name = "ChanceOfBirthInput";
+            this.ChanceOfBirthInput.Size = new System.Drawing.Size(124, 22);
+            this.ChanceOfBirthInput.TabIndex = 13;
             // 
             // VirusTabPage
             // 
@@ -1275,8 +1359,10 @@
             this.FieldSizeLayout.ResumeLayout(false);
             this.FieldSizeLayout.PerformLayout();
             this.CellsTabPage.ResumeLayout(false);
-            this.CellsPropertiesGroupBox.ResumeLayout(false);
             this.CellsPropertiesLayout.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) (this.DistanceOfCoitusInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.VelocityMaxInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.VelocityMinInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.CellRadiusMaxInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.CellRadiusMinInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.CoitusRelaxationMaxInput)).EndInit();
@@ -1288,8 +1374,8 @@
             ((System.ComponentModel.ISupportInitialize) (this.AgeMaxInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.AgeMinInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.DeathMinInput)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.ChanceOfBirthInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.DeathMaxInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.ChanceOfBirthInput)).EndInit();
             this.VirusTabPage.ResumeLayout(false);
             this.VirusLayout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize) (this.InfectedAgeDecrementerInput)).EndInit();
@@ -1308,6 +1394,16 @@
             ((System.ComponentModel.ISupportInitialize) (this.LockdownInfectedRateInput)).EndInit();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Label DistanceOfCoitusLabel;
+        private System.Windows.Forms.NumericUpDown DistanceOfCoitusInput;
+
+
+        private System.Windows.Forms.NumericUpDown VelocityMinInput;
+        private System.Windows.Forms.NumericUpDown VelocityMaxInput;
+        private System.Windows.Forms.Label VelocityMaxLabel;
+        private System.Windows.Forms.Label VelocityMinLabel;
+        private System.Windows.Forms.Label VelocityLabel;
 
         private System.Windows.Forms.Label InfectedAgeDecrementerLabel;
         private System.Windows.Forms.NumericUpDown InfectedAgeDecrementerInput;
@@ -1397,7 +1493,6 @@
         private System.Windows.Forms.Label ChanceOfBirthLabel;
         private System.Windows.Forms.NumericUpDown ChanceOfBirthInput;
         private System.Windows.Forms.TableLayoutPanel CellsPropertiesLayout;
-        private System.Windows.Forms.GroupBox CellsPropertiesGroupBox;
 
 
         private System.Windows.Forms.Label InfectedCellsLabel;
