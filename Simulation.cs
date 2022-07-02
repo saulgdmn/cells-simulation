@@ -98,6 +98,7 @@ namespace LifeProj
         public static readonly SolidBrush InfectedBrush = new SolidBrush(Color.DarkRed);
         public static readonly SolidBrush IncubationBrush = new SolidBrush(Color.Yellow);
         public static readonly SolidBrush RecoveredBrush = new SolidBrush(Color.DarkBlue);
+        public static readonly SolidBrush IsolatedBrush = new SolidBrush(Color.DarkRed);
         
         public static readonly Font MetricsFont = new Font("Consolas", 8);
         public static readonly SolidBrush MetricsBrush = new SolidBrush(Color.Black);

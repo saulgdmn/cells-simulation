@@ -23,7 +23,7 @@ namespace LifeProj.View {
             InitializeComponent();
 
             Simulation.FieldWidth = SimulationPanel.Width - 2;
-            Simulation.FieldHeight = SimulationPanel.Height - 2;
+            Simulation.FieldHeight = SimulationPanel.Height - 2 - (int)Simulation.CellRadiusMax * 4 - 20;
             FieldHeightInput.Text = (SimulationPanel.Height - 2).ToString();
             FieldWidthInput.Text = (SimulationPanel.Width - 2).ToString();
             _field = new Field();
@@ -80,10 +80,27 @@ namespace LifeProj.View {
                     CellState.Incubation => Simulation.IncubationBrush,
                     CellState.Infected => Simulation.InfectedBrush,
                     CellState.Recovered => Simulation.RecoveredBrush,
-                    _ => Simulation.HealthyBrush
+                    _ => null
                 };
+                
+                if(brush == null)
+                    continue;
+
                 Utils.FillCircle(e.Graphics, brush, cell.Position.X, cell.Position.Y, (float)cell.Radius);
             }
+            
+            double isolatedX = 10.0, isolatedY = Simulation.FieldHeight + Simulation.CellRadiusMax + 10.0;
+            foreach (var cell in _field.Cells.FindAll(x => x.State == CellState.Isolated).ToArray())
+            {
+                Utils.FillCircle(e.Graphics, Simulation.IsolatedBrush, (float)isolatedX, (float)isolatedY, (float)cell.Radius);
+                isolatedX += cell.Radius + 10.0;
+                if (isolatedX >= Simulation.FieldWidth)
+                {
+                    isolatedX = 10.0;
+                    isolatedY += Simulation.CellRadiusMax * 2 + 10.0;
+                }
+            }
+            
             DrawSimulationInformation(e.Graphics);
         }
 
@@ -107,7 +124,8 @@ namespace LifeProj.View {
                 "IncubationCellsCount: " + _field.GetIncubationCellsCount() + "\n" + 
                 "RecoveredCellsCount: " + _field.GetRecoveredCellsCount() + "\n" +
                 "DeathByAgeCellsCount: " + _field.GetDeathByAgeCellsCount() + "\n" +
-                "DeathByInfectionCellsCount: " + _field.GetDeathByInfectionCellsCount(),
+                "DeathByAgeCellsCount: " + _field.GetDeathByAgeCellsCount() + "\n" +
+                "IsolatedCellsCount: " + _field.GetIsolatedCellsCount(),
                 Simulation.MetricsFont, Simulation.MetricsBrush, 2, 2, drawFormat);
         }
 
@@ -140,9 +158,9 @@ namespace LifeProj.View {
 
         private void MainForm_Resize(object sender, EventArgs e){
             Simulation.FieldWidth = SimulationPanel.Width - 2;
-            Simulation.FieldHeight = SimulationPanel.Height - 2;
+            Simulation.FieldHeight = SimulationPanel.Height - 2 - (int)Simulation.CellRadiusMax * 4 - 20;
 
-            FieldHeightInput.Text = (SimulationPanel.Height - 2).ToString();
+            FieldHeightInput.Text = (SimulationPanel.Height - 2 - (int)Simulation.CellRadiusMax * 4 - 20).ToString();
             FieldWidthInput.Text = (SimulationPanel.Width - 2).ToString();
             SimulationPanel.Refresh();
         }
