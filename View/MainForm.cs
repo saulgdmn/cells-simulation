@@ -21,12 +21,7 @@ namespace LifeProj.View {
         public MainForm(){
             
             InitializeComponent();
-            SetStyle(
-                ControlStyles.AllPaintingInWmPaint | 
-                ControlStyles.UserPaint | 
-                ControlStyles.DoubleBuffer, 
-                true);
-            
+
             Simulation.FieldWidth = SimulationPanel.Width - 2;
             Simulation.FieldHeight = SimulationPanel.Height - 2;
             FieldHeightInput.Text = (SimulationPanel.Height - 2).ToString();
