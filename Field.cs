@@ -48,7 +48,7 @@ namespace LifeProj
                     CellsPositions.Add(new Vector2(x,y));
             }
             
-            foreach (var position in CellsPositions.OrderBy(x => Simulation.Rand.Next()).Take(Simulation.OnInitCellsCount))
+            foreach (var position in CellsPositions.OrderBy(x => ThreadSafeRandom.Next()).Take(Simulation.OnInitCellsCount))
                 Cells.Add(new Cell(
                     Simulation.GenAge(),
                     Simulation.GenLifespan(),
@@ -59,7 +59,7 @@ namespace LifeProj
                     Simulation.GenDirection(),
                     this));
 
-            foreach (var cell in Cells.OrderBy(x => Simulation.Rand.Next()).Take(Simulation.OnInitInfectedCellsCount))
+            foreach (var cell in Cells.OrderBy(x => ThreadSafeRandom.Next()).Take(Simulation.OnInitInfectedCellsCount))
                 cell.State = CellState.Infected;
         }
 
